@@ -9,7 +9,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: space-evenly;
     overflow: hidden;
 }
 
@@ -26,21 +26,40 @@ section {
     align-items: center;
 }
 
-main {
+.main {
     display: flex;
     flex-wrap: wrap;
     margin: 0 auto;
-
 }
 
+button.cat {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: transparent;
+    border-color: whitesmoke;
+}
+
+/* button#0 img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+} */
+
 button:hover {
+    border: 3px solid lightsalmon;
     cursor: pointer;
 }
 
 #reset button {
+    /* border: 3px solid lightsalmon; */
     background-color: transparent;
     color: whitesmoke;
     border-color: whitesmoke;
     padding: 5px 20px;
+}
+
+#reset button:hover {
+    border: 3px solid lightsalmon;
 }
 
