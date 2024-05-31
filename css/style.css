@@ -19,6 +19,7 @@ h1 {
 }
 
 h2 {
+    color: whitesmoke;
     text-align: center;
 }
 section {
@@ -32,7 +33,7 @@ section {
     margin: 0 auto;
 }
 
-button.cat {
+button.cats {
     width: 100px;
     height: 100px;
     border-radius: 50%;
