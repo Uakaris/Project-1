@@ -22,6 +22,14 @@ h2 {
     color: whitesmoke;
     text-align: center;
 }
+
+#play button {
+    background-color: transparent;
+    color: whitesmoke;
+    border-color: whitesmoke;
+    padding: 5px 20px;
+}
+
 section {
     justify-content: center;
     align-items: center;
