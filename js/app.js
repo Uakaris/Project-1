@@ -2,7 +2,7 @@
 // I want to create a function that iterates through the cats array at random
 // I want to have a play button
 // The play button will call the function that iterates over the cats array
-// I want a function that iterates over the cat array, starting with just one and increasing by one each time
+// I want a function that iterates over the cat array, starting with just one and increasing by one each time (a for() loop could be used here)
 
 
 /*-------------------------------- Constants --------------------------------*/
@@ -16,6 +16,7 @@ const catIds = [
 /*---------------------------- Variables (state) ----------------------------*/
 let main = [catIds]; 
 const elementCatsArray = catIds.map(id => document.getElementById(id));
+let gameStart;
 let gameOver;
 /*------------------------ Cached Element References ------------------------*/
 const lilCatsElement = document.querySelectorAll('.cats');
@@ -25,11 +26,12 @@ const resetButtonElement = document.querySelector('#reset');
 /*-------------------------------- Functions --------------------------------*/
 
 function init() {
-
+    gameStart = true;
+    updateMessage();
 }
 
 function render() {
-    
+    updateMessage();
 }
 
 // function handleClick(event) {
@@ -49,6 +51,15 @@ function gamePlay() {
     lilCatsElement.forEach(cat => {
         console.log(cat.id);
     });
+}
+
+function updateMessage() {
+    if (gameStart === false) {
+        return;
+    }
+    else if (gameStart === true) {
+        resultDisplayElement.textContent = 'Click play to begin';
+    }
 }
 
 function reset() {
