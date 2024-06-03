@@ -17,8 +17,6 @@ const resetButtonElement = document.querySelector('#reset');
 
 function init() {
     shuffle();
-    // board = ['', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '',];
-    // gameStart = true;
     render();
 }
 
@@ -35,20 +33,12 @@ function shuffle() {
     // Fisher-Yates shuffle algorithm
 }
 
-// function handleClick(event) {
-//     const catIndex= event.target.id; // Which cat id from HTML triggered click event.
-//     const catValue = elementCatsArray[catIndex];
-//     // const catValue = main[catIndex];
-//     gamePlay();
-// }
-
-
 function handleClick(event) {
     const square = event.target;
     const index = parseInt(square.id);
 
     if (!squareClicked[index]) { // Check if the square has not been clicked yet
-        square.textContent = emojis[index]; // Display the emoji
+        square.textContent = emojis[index]; // Display the emoji once clicked.
         squareClicked[index] = true; // Update the state to indicate the square has been clicked
     }
 }
@@ -86,11 +76,7 @@ function reset() {
     init();
 }
 
-// function updateMessage() {
-//     if (winner === false) {
-//         resultDisplayElement.textContent = 'Play?';
-//     }
-// }
+
 /*----------------------------- Event Listeners -----------------------------*/
 
 document.addEventListener('DOMContentLoaded', init);
@@ -98,3 +84,4 @@ document.addEventListener('DOMContentLoaded', init);
 boardElement.addEventListener('click', handleClick);
 
 resetButtonElement.addEventListener('click', reset);
+ 
