@@ -1,5 +1,4 @@
 /*-------------------------------- Constants --------------------------------*/
-// const gamePlayOptions = 
 const emojis = ['🫠','🫠', '🐓', '🐓', '🦭', '🦭', '🌵', '🌵', '💩', '💩', '😾', '😾', '👾', '👾', '🥚', '🥚'];
 /*---------------------------- Variables (state) ----------------------------*/
 const elementemojiArray = emojis.map(id => document.getElementById(id));
@@ -12,9 +11,7 @@ const squareElement = document.querySelectorAll('.sqr');
 const resultDisplayElement = document.querySelector('#message');
 const boardElement = document.querySelector('.board');
 const resetButtonElement = document.querySelector('#reset');
-
 /*-------------------------------- Functions --------------------------------*/
-
 function init() {
     shuffle();
     render();
@@ -43,7 +40,6 @@ function handleClick(event) {
     }
 }
 
-
 // function gamePlay() {
 //     squareElement.forEach(sqr => {
 //         console.log(sqr.id);
@@ -70,9 +66,8 @@ function updateMessage() {
 }
 
 function reset() {
-    updateBoard();
-    shuffle();
-    squareClicked.fill(false);
+    // shuffle();
+    // squareClicked.fill(false);
     init();
 }
 
@@ -84,4 +79,3 @@ document.addEventListener('DOMContentLoaded', init);
 boardElement.addEventListener('click', handleClick);
 
 resetButtonElement.addEventListener('click', reset);
- 
