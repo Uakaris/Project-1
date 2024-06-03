@@ -30,7 +30,7 @@ function shuffle() {
         const j = Math.floor(Math.random() * (i + 1));
         [emojis[i], emojis[j]] = [emojis[j], emojis[i]];
     }
-    // Fisher-Yates shuffle algorithm
+    // Fisher-Yates shuffle algorithm to shuffle the order of emojis
 }
 
 function handleClick(event) {
