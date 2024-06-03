@@ -2,14 +2,21 @@
 const emojis = ['🫠','🫠', '🐓', '🐓', '🦭', '🦭', '🌵', '🌵', '💩', '💩', '😾', '😾', '👾', '👾', '🥚', '🥚'];
 /*---------------------------- Variables (state) ----------------------------*/
 const elementemojiArray = emojis.map(id => document.getElementById(id));
+
 let squareClicked = new Array(16).fill(false);
+
 let board;
+
 let gameStart;
+
 let gameOver;
 /*------------------------ Cached Element References ------------------------*/
 const squareElement = document.querySelectorAll('.sqr');
+
 const resultDisplayElement = document.querySelector('#message');
+
 const boardElement = document.querySelector('.board');
+
 const resetButtonElement = document.querySelector('#reset');
 /*-------------------------------- Functions --------------------------------*/
 function init() {
@@ -70,10 +77,7 @@ function reset() {
     // squareClicked.fill(false);
     init();
 }
-
-
 /*----------------------------- Event Listeners -----------------------------*/
-
 document.addEventListener('DOMContentLoaded', init);
 
 boardElement.addEventListener('click', handleClick);
