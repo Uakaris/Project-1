@@ -7,31 +7,39 @@
 
 /*-------------------------------- Constants --------------------------------*/
 // const gamePlayOptions = 
-const catIds = [
-    ['cat1'], 
-    ['cat2'], 
-    ['cat3'], 
-    ['cat4']
-];
+const emojis = ['🫠','🫠', '🐓', '🐓', '🦭', '🦭', '🌵', '🌵', '💩', '💩', '😾', '😾', '👾', '👾', '🥚', '🥚'];
 /*---------------------------- Variables (state) ----------------------------*/
-let main = [catIds]; 
-const elementCatsArray = catIds.map(id => document.getElementById(id));
+const elementemojiArray = emojis.map(id => document.getElementById(id));
+let board;
 let gameStart;
 let gameOver;
 /*------------------------ Cached Element References ------------------------*/
-const lilCatsElement = document.querySelectorAll('.cats');
+const squareElement = document.querySelectorAll('.sqr');
 const resultDisplayElement = document.querySelector('#message');
-const mainElement = document.querySelector('.main');
+const boardElement = document.querySelector('.board');
 const resetButtonElement = document.querySelector('#reset');
+
 /*-------------------------------- Functions --------------------------------*/
 
 function init() {
-    gameStart = true;
-    updateMessage();
+    shuffle();
+    board = ['', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '',];
+    // gameStart = true;
+
+
+    render();
 }
 
 function render() {
     updateMessage();
+    updateBoard();
+}
+
+function shuffle() {
+    for (let i = emojis.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [emojis[i], emojis[j]] = [emojis[j], emojis[i]];
+    }
 }
 
 // function handleClick(event) {
@@ -41,17 +49,28 @@ function render() {
 //     gamePlay();
 // }
 
+
 function handleClick(event) {
-    const clickedCatIndex = elementCatsArray.indexOf(event.target);
-    const clickedCatId = catIds[clickedCatIndex];
-    gamePlay();
+    const square = event.target;
+    const index = parseInt(square.id);
+    if (!square.textContent.trim()) {
+        square.textContent = emojis[index];
+    }
 }
 
-function gamePlay() {
-    lilCatsElement.forEach(cat => {
-        console.log(cat.id);
+// function gamePlay() {
+//     squareElement.forEach(sqr => {
+//         console.log(sqr.id);
+//     });
+// }
+
+function updateBoard() {
+    emojis.forEach((emoji, index) => {
+    // console.log(index);
+    const squareElement = document.getElementById(index);
+    squareElement.textContent = emoji;
     });
-}
+    }
 
 function updateMessage() {
     if (gameStart === false) {
@@ -63,7 +82,7 @@ function updateMessage() {
 }
 
 function reset() {
-    // console.log('clicked!');
+    
     init();
 }
 
@@ -76,6 +95,6 @@ function reset() {
 
 document.addEventListener('DOMContentLoaded', init);
 
-mainElement.addEventListener('click', handleClick);
+boardElement.addEventListener('click', handleClick);
 
 resetButtonElement.addEventListener('click', reset);
