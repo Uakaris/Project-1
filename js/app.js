@@ -1,15 +1,9 @@
-// I need to turn the cats into an array...
-// I want to create a function that iterates through the cats array at random
-// I want to have a play button
-// The play button will call the function that iterates over the cats array
-// I want a function that iterates over the cat array, starting with just one and increasing by one each time (a for() loop could be used here)
-
-
 /*-------------------------------- Constants --------------------------------*/
 // const gamePlayOptions = 
 const emojis = ['🫠','🫠', '🐓', '🐓', '🦭', '🦭', '🌵', '🌵', '💩', '💩', '😾', '😾', '👾', '👾', '🥚', '🥚'];
 /*---------------------------- Variables (state) ----------------------------*/
 const elementemojiArray = emojis.map(id => document.getElementById(id));
+let squareClicked = new Array(16).fill(false);
 let board;
 let gameStart;
 let gameOver;
@@ -23,10 +17,8 @@ const resetButtonElement = document.querySelector('#reset');
 
 function init() {
     shuffle();
-    board = ['', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '',];
+    // board = ['', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '',];
     // gameStart = true;
-
-
     render();
 }
 
@@ -40,6 +32,7 @@ function shuffle() {
         const j = Math.floor(Math.random() * (i + 1));
         [emojis[i], emojis[j]] = [emojis[j], emojis[i]];
     }
+    // Fisher-Yates shuffle algorithm
 }
 
 // function handleClick(event) {
@@ -53,10 +46,13 @@ function shuffle() {
 function handleClick(event) {
     const square = event.target;
     const index = parseInt(square.id);
-    if (!square.textContent.trim()) {
-        square.textContent = emojis[index];
+
+    if (!squareClicked[index]) { // Check if the square has not been clicked yet
+        square.textContent = emojis[index]; // Display the emoji
+        squareClicked[index] = true; // Update the state to indicate the square has been clicked
     }
 }
+
 
 // function gamePlay() {
 //     squareElement.forEach(sqr => {
@@ -68,8 +64,10 @@ function updateBoard() {
     emojis.forEach((emoji, index) => {
     // console.log(index);
     const squareElement = document.getElementById(index);
-    squareElement.textContent = emoji;
-    });
+    if (!squareClicked[index]) {
+        emojis.textContent = '';
+         }
+        });
     }
 
 function updateMessage() {
@@ -82,7 +80,9 @@ function updateMessage() {
 }
 
 function reset() {
-    
+    updateBoard();
+    shuffle();
+    squareClicked.fill(false);
     init();
 }
 
