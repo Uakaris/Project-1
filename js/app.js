@@ -1,15 +1,13 @@
 /*-------------------------------- Constants --------------------------------*/
-const emojis = ['🫠','🫠', '🐓', '🐓', '🦭', '🦭', '🌵', '🌵', '💩', '💩', '😾', '😾', '👾', '👾', '🥚', '🥚'];
+const emojis = ['🫠','🫠', '🐓', '🐓', '🦭', '🦭', '🌵', '🌵', '💩', '💩', '😾', '😾', '👾', '👾', '🦦', '🦦'];
 /*---------------------------- Variables (state) ----------------------------*/
 const elementemojiArray = emojis.map(id => document.getElementById(id));
 
-let squareClicked = new Array(16).fill(false);
+// let squareClicked = new Array(16).fill(false);
+
+let squareClicked = ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",];
 
 let board;
-
-let firstClick;
-
-let secondClick;
 
 let selectedEmojis = [];
 
@@ -58,7 +56,7 @@ function handleClick(event) {
             if (selectedEmojis[0] === selectedEmojis[1]) {
                 matchingCombos.push(selectedEmojis[0]. emoji);
                 matchingCombos.push(selectedEmojis[1]. emoji);
-                // selectedEmojis = [];
+                selectedEmojis = [];
             }
         } else {
             setTimeout(() => {
@@ -69,21 +67,21 @@ function handleClick(event) {
     }
 }
 
-function hideSquares(index1, index2) {
-    const emoji1 = emojis[index1];
-    const emoji2 = emojis[index2];
+function hideSquares(index0, index1) {
+    const emoji1 = emojis[index0];
+    const emoji2 = emojis[index1];
 
     if (emoji1 === emoji2) {
         // If the emojis match, return without hiding
         return;
     }
 
-    const square1 = document.getElementById(index1);
-    const square2 = document.getElementById(index2);
+    const square1 = document.getElementById(index0);
+    const square2 = document.getElementById(index1);
     square1.textContent = '';
     square2.textContent = '';
+    squareClicked[index0] = false;
     squareClicked[index1] = false;
-    squareClicked[index2] = false;
 }
 
 
@@ -113,8 +111,8 @@ function updateMessage() {
 }
 
 function reset() {
-    // squareClicked.fill(false);
-    init();
+    squareClicked.fill(false);
+    // init();
 }
 /*----------------------------- Event Listeners -----------------------------*/
 document.addEventListener('DOMContentLoaded', init);
