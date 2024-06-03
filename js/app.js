@@ -7,6 +7,14 @@ let squareClicked = new Array(16).fill(false);
 
 let board;
 
+let firstClick;
+
+let secondClick;
+
+let selectedEmojis = [];
+
+let matchingCombos = [];
+
 let gameStart;
 
 let gameOver;
@@ -21,6 +29,7 @@ const resetButtonElement = document.querySelector('#reset');
 /*-------------------------------- Functions --------------------------------*/
 function init() {
     shuffle();
+    board = ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",];
     render();
 }
 
@@ -44,8 +53,39 @@ function handleClick(event) {
     if (!squareClicked[index]) { // Check if the square has not been clicked yet
         square.textContent = emojis[index]; // Display the emoji once clicked.
         squareClicked[index] = true; // Update the state to indicate the square has been clicked
+        selectedEmojis.push({ emoji: emojis[index], index: index });
+        if (selectedEmojis.length === 2) {
+            if (selectedEmojis[0] === selectedEmojis[1]) {
+                matchingCombos.push(selectedEmojis[0]. emoji);
+                matchingCombos.push(selectedEmojis[1]. emoji);
+                // selectedEmojis = [];
+            }
+        } else {
+            setTimeout(() => {
+                hideSquares(selectedEmojis[0].index, selectedEmojis[1].index);
+                selectedEmojis = [];
+            }, 2000);
+        }
     }
 }
+
+function hideSquares(index1, index2) {
+    const emoji1 = emojis[index1];
+    const emoji2 = emojis[index2];
+
+    if (emoji1 === emoji2) {
+        // If the emojis match, return without hiding
+        return;
+    }
+
+    const square1 = document.getElementById(index1);
+    const square2 = document.getElementById(index2);
+    square1.textContent = '';
+    square2.textContent = '';
+    squareClicked[index1] = false;
+    squareClicked[index2] = false;
+}
+
 
 // function gamePlay() {
 //     squareElement.forEach(sqr => {
@@ -73,7 +113,6 @@ function updateMessage() {
 }
 
 function reset() {
-    // shuffle();
     // squareClicked.fill(false);
     init();
 }
