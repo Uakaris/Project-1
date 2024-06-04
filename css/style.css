@@ -77,13 +77,14 @@ section {
     display: flex;
     flex-wrap: wrap;
     width: 325px;
+    /* height: 325px; */
     margin: 0 auto;
 }
 
 button.sqr {
     width: 25%;
     aspect-ratio: 1/1;
-    background-color: transparent;
+    background-color: #e1c5a3;
     border-color: #ffef55;
     font-size: 50px;
 }
@@ -97,8 +98,8 @@ button:hover {
     font-family: "Press Start 2P", system-ui;
     font-weight: 400;
     font-style: normal;
-    background-color: transparent;
-    color: orange;
+    background-color: #e1c5a3;
+    color: #0097c3;
     border-color: #ffef55;
     padding: 20px 25px;
 }
