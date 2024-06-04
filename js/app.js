@@ -48,8 +48,8 @@ function render() {
 
 function shuffle() {
     for (let i = emojis.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [emojis[i], emojis[j]] = [emojis[j], emojis[i]];
+        const randomIndex = Math.floor(Math.random() * (i + 1));
+        [emojis[i], emojis[randomIndex]] = [emojis[randomIndex], emojis[i]];
     }
     // Fisher-Yates shuffle algorithm to shuffle the order of emojis
 }
@@ -97,18 +97,19 @@ function hideSquares(index0, index1) {
     squareClicked[index1] = false;
 }
 
-
-// function gamePlay() {
-//     squareElement.forEach(sqr => {
-//         console.log(sqr.id);
-//     });
-// }
-
 function checkForWinner() {
-    if (matchingCombos.index === 8) {
-        // console.log('winner');
-        winner = true;
-    }
+    emojis.forEach((filledSquare) => {
+        const [index1, index2, index3, index4] = emojis;
+        const valueA = board[index1];
+        const valueB = board[index2];
+        const valueC = board[index3];
+        const valueD = board[index4];
+
+        if (valueA !== "" && valueA === valueB && valueB === valueC && valueC === valueD) {
+            winner = true;
+        }
+    });
+    
 }
 
 function updateBoard() {
@@ -154,7 +155,7 @@ soundSquareElement.forEach(square => {
 
 soundresetElement.addEventListener('click', (event) => {
     const sqrSound = new Audio('../Sounds/263706__b_lamerichs__ableton-game-sound-effects-09-02-2015-4.mp3');
-    sqrSound.volume = 0.05;
+    sqrSound.volume = 0.09;
     sqrSound.play();
 });
 
