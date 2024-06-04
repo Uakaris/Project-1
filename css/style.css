@@ -13,10 +13,10 @@ body {
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    animation: spin;
+    /* animation: spin;
     animation-duration: 600ms;
     animation-iteration-count:inherit;
-    animation-timing-function: ease-out;
+    animation-timing-function: ease-out; */
 }
 
 h1 {
@@ -45,10 +45,10 @@ h2 {
 section {
     justify-content: center;
     align-items: center;
-    /* animation: spin;
-    animation-duration: 1000ms;
-    animation-iteration-count: initial;
-    animation-timing-function: linear; */
+    animation: spin;
+    animation-duration: 550ms;
+    animation-iteration-count:inherit;
+    animation-timing-function: ease-out;
 }
 
 @keyframes spin {
@@ -56,7 +56,7 @@ section {
         transform: rotate(0deg);
     }
     to {
-        transform: rotate(360deg);
+        transform: rotate(900deg);
     }
 }
 
