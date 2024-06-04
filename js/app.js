@@ -147,14 +147,14 @@ boardElement.addEventListener('click', handleClick);
 
 soundSquareElement.forEach(square => {
     square.addEventListener('click', (event) => {
-        const sqrSound = new Audio('../Sounds/108616__juskiddink__hard-pop.wav');
+        const sqrSound = new Audio('./Sounds/108616__juskiddink__hard-pop.wav');
         sqrSound.volume = 0.10;
         sqrSound.play();
     });
 });
 
 soundresetElement.addEventListener('click', (event) => {
-    const sqrSound = new Audio('../Sounds/263706__b_lamerichs__ableton-game-sound-effects-09-02-2015-4.mp3');
+    const sqrSound = new Audio('./Sounds/263706__b_lamerichs__ableton-game-sound-effects-09-02-2015-4.mp3');
     sqrSound.volume = 0.09;
     sqrSound.play();
 });
