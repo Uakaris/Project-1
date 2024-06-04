@@ -21,6 +21,10 @@ let gameOver;
 
 let choosingSquare = false;
 /*------------------------ Cached Element References ------------------------*/
+const soundSquareElement = document.querySelectorAll('.sqr');
+
+const soundresetElement = document.querySelector('#reset');
+
 const squareElement = document.querySelectorAll('.sqr');
 
 const resultDisplayElement = document.querySelector('#message');
@@ -118,13 +122,10 @@ function updateBoard() {
     }
 
 function updateMessage() {
-    if (gameStart === false) {
-        return;
-    }
     if (gameStart === true) {
         resultDisplayElement.textContent = 'Click any square to begin';
     } 
-    else if (winner === true) 
+    if (winner === true) 
         resultDisplayElement.textContent = 'Winner!';
 }
 
@@ -142,5 +143,19 @@ function reset() {
 document.addEventListener('DOMContentLoaded', init);
 
 boardElement.addEventListener('click', handleClick);
+
+soundSquareElement.forEach(square => {
+    square.addEventListener('click', (event) => {
+        const sqrSound = new Audio('../Sounds/108616__juskiddink__hard-pop.wav');
+        sqrSound.volume = 0.10;
+        sqrSound.play();
+    });
+});
+
+soundresetElement.addEventListener('click', (event) => {
+    const sqrSound = new Audio('../Sounds/263706__b_lamerichs__ableton-game-sound-effects-09-02-2015-4.mp3');
+    sqrSound.volume = 0.05;
+    sqrSound.play();
+});
 
 resetButtonElement.addEventListener('click', reset);
