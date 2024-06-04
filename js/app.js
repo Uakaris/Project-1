@@ -50,33 +50,6 @@ function shuffle() {
     // Fisher-Yates shuffle algorithm to shuffle the order of emojis
 }
 
-// function handleClick(event) {
-//     const square = event.target;
-//     const index = parseInt(square.id);
-//     // squareClicked.fill(false);
-//     if (!squareClicked[index] && !choosingSquare) { // Check if the square has not been clicked yet
-//         square.textContent = emojis[index]; // Display the emoji once clicked.
-//         squareClicked[index] = true; // Update the state to indicate the square has been clicked
-//         selectedEmojis.push({ emoji: emojis[index], index: index });
-//         // choosingSquare = true;
-//         if (selectedEmojis.length === 2) {
-//             choosingSquare = true;
-//             if (selectedEmojis[0].emoji === selectedEmojis[1].emoji) {
-//                 matchingCombos.push(selectedEmojis[0]. emoji);
-//                 matchingCombos.push(selectedEmojis[1]. emoji);
-//                 selectedEmojis = [];
-//             }
-//         } else {
-//             setTimeout(() => {
-//                 hideSquares(selectedEmojis[0].index, selectedEmojis[1].index);
-//                 choosingSquare = false;
-//                 selectedEmojis = [];
-//             }, 1500);
-//             // squareClicked.fill(false);
-//         }
-//     }
-// }
-
 function handleClick(event) {
     const square = event.target;
     const index = parseInt(square.id);
