@@ -3,7 +3,7 @@ const emojis = ['🫠','🫠', '🐓', '🐓', '🦄', '🦄', '🌵', '🌵', '
 /*---------------------------- Variables (state) ----------------------------*/
 const elementemojiArray = emojis.map(id => document.getElementById(id));
 
-// let squareClicked = new Array(16).fill(false);
+const matchingComboSound = new Audio('./Sounds/matching-combo-clap.wav');
 
 let squareClicked = ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",];
 
@@ -34,7 +34,8 @@ const boardElement = document.querySelector('.board');
 const resetButtonElement = document.querySelector('#reset');
 /*-------------------------------- Functions --------------------------------*/
 function init() {
-    // gameStart = true;
+    resultDisplayElement.textContent = 'Click any square to begin';
+    gameStart = true;
     winner = false;
     shuffle();
     board = ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",];
@@ -42,7 +43,7 @@ function init() {
 }
 
 function render() {
-    updateMessage();
+    // updateMessage();
     updateBoard();
 }
 
@@ -55,6 +56,10 @@ function shuffle() {
 }
 
 function handleClick(event) {
+
+    winner = checkForWinner();
+    updateMessage();
+
     const square = event.target;
     const index = parseInt(square.id);
 
@@ -68,6 +73,8 @@ function handleClick(event) {
                 matchingCombos.push(selectedEmojis[0].emoji);
                 matchingCombos.push(selectedEmojis[1].emoji);
                 selectedEmojis = [];
+                matchingComboSound.volume = 0.40;
+                matchingComboSound.play();
             } else {
                 choosingSquare = true; // Set choosingSquare to true when it is required
                 setTimeout(() => {
@@ -78,17 +85,16 @@ function handleClick(event) {
             }
         }
     }
-    checkForWinner();
 }
 
 function hideSquares(index0, index1) {
     const emoji1 = emojis[index0];
     const emoji2 = emojis[index1];
 
-    if (emoji1 === emoji2) {
-        // If the emojis match, return without hiding
-        return;
-    }
+    // if (emoji1 === emoji2) {
+    //     // If the emojis match, return without hiding
+    //     return;
+    // }
 
     const square1 = document.getElementById(index0);
     const square2 = document.getElementById(index1);
@@ -98,25 +104,9 @@ function hideSquares(index0, index1) {
     squareClicked[index1] = false;
 }
 
-// function checkForWinner() {
-//     emojis.forEach((filledSquare) => {
-//         const [index1, index2, index3, index4] = emojis;
-//         const valueA = board[index1];
-//         const valueB = board[index2];
-//         const valueC = board[index3];
-//         const valueD = board[index4];
-
-//         if (valueA !== "" && valueA === valueB && valueB === valueC && valueC === valueD) {
-//             winner = true;
-//         }
-//     });
-    
-// }
-
 function checkForWinner() {
-    if (!squareClicked.includes("")) 
-       return winner = true;
-        gameStart = false; 
+    if (!squareClicked.includes("")) return true; 
+        // gameStart = false
 }
 
 function updateBoard() {
@@ -130,8 +120,9 @@ function updateBoard() {
     }
 
 function updateMessage() {
-    if (squareClicked.includes("")) {
-        resultDisplayElement.textContent = 'Click any square to begin';
+    if (squareClicked.includes("") && gameStart === true) {
+        resultDisplayElement.textContent = "";
+        gameStart = false;
     }
     else if (winner === true && gameStart === false) { 
         resultDisplayElement.textContent = 'Winner!';
@@ -147,6 +138,7 @@ function reset() {
     matchingCombos =[];
     updateBoard();
     shuffle();
+    // resultDisplayElement.textContent = 'Click any square to begin';
 }
 /*----------------------------- Event Listeners -----------------------------*/
 document.addEventListener('DOMContentLoaded', init);
@@ -160,14 +152,6 @@ soundSquareElement.forEach(square => {
         sqrSound.play();
     });
 });
-
-// soundMatchingCombos.forEach(matchingCombo => {
-//     matchingCombo.addEventListener('click', (event) => {
-//         const matchingComboSound = new Audio('./Sounds/matching-combo-clap.wav');
-//         matchingComboSound.volume = 0.40;
-//         matchingComboSound.play();
-//     });
-// });
 
 soundresetElement.addEventListener('click', (event) => {
     const sqrSound = new Audio('./Sounds/reset-audio.mp3');
