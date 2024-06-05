@@ -4,6 +4,14 @@ const emojis = ['🫠','🫠', '🐓', '🐓', '🦄', '🦄', '🌵', '🌵', '
 
 const matchingComboSound = new Audio('./Sounds/matching-combo-clap.wav');
 
+const nonMatchSound = new Audio('./Sounds/non-match.wav');
+
+// const startSound = new Audio('./Sounds/game-start-sound.wav');
+
+const winnerSound = new Audio('./Sounds/winner-sound.mp3');
+
+const soundresetElement = document.querySelector('#reset');
+
 let squareClicked = ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",];
 
 let board;
@@ -22,8 +30,6 @@ let choosingSquare = false;
 /*------------------------ Cached Element References ------------------------*/
 const soundSquareElement = document.querySelectorAll('.sqr');
 
-const soundresetElement = document.querySelector('#reset');
-
 const squareElement = document.querySelectorAll('.sqr');
 
 const resultDisplayElement = document.querySelector('#message');
@@ -34,6 +40,8 @@ const resetButtonElement = document.querySelector('#reset');
 /*-------------------------------- Functions --------------------------------*/
 function init() {
     resultDisplayElement.textContent = 'Click any square to begin';
+    // startSound.volume = 0.40;
+    // startSound.play();
     gameStart = true;
     winner = false;
     board = ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",];
@@ -76,6 +84,8 @@ function handleClick(event) {
                 matchingComboSound.play();
             } else {
                 choosingSquare = true; // Set choosingSquare to true when it is required
+                nonMatchSound.volume = 0.30;
+                nonMatchSound.play();
                 setTimeout(() => {
                     hideSquares(selectedEmojis[0].index, selectedEmojis[1].index);
                     choosingSquare = false; // Reset choosingSquare to false after hiding squares so the game can continue
@@ -106,6 +116,8 @@ function hideSquares(index0, index1) {
 function checkForWinner() {
     if (matchingCombos.length === emojis.length) {
         resultDisplayElement.textContent = 'Winner!';
+        winnerSound.volume = 0.40;
+        winnerSound.play();
     }
 }
 
@@ -152,7 +164,7 @@ soundSquareElement.forEach(square => {
 });
 
 soundresetElement.addEventListener('click', (event) => {
-    const sqrSound = new Audio('./Sounds/reset-audio.mp3');
+    const sqrSound = new Audio('./Sounds/game-start-sound.wav');
     sqrSound.volume = 0.30;
     sqrSound.play();
 });
