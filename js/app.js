@@ -37,8 +37,8 @@ function init() {
     resultDisplayElement.textContent = 'Click any square to begin';
     gameStart = true;
     winner = false;
-    shuffle();
     board = ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",];
+    shuffle();
     render();
 }
 
@@ -58,6 +58,7 @@ function shuffle() {
 function handleClick(event) {
 
     winner = checkForWinner();
+    // gameStart = !winner;
     updateMessage();
 
     const square = event.target;
@@ -84,6 +85,9 @@ function handleClick(event) {
                 }, 1000);
             }
         }
+        // winner = checkForWinner();
+        // gameStart = !winner;
+        // updateMessage();
     }
 }
 
@@ -130,16 +134,25 @@ function updateMessage() {
 }
 
 function reset() {
-    // squareClicked.fill(false);
+    init();
+    updateMessage();
     squareClicked = new Array(emojis.length).fill(false);
     squareElement.forEach((square, index) => {
         square.textContent = '';
     });
-    matchingCombos =[];
-    updateBoard();
-    shuffle();
-    // resultDisplayElement.textContent = 'Click any square to begin';
 }
+    // winner = checkForWinner();
+    // updateMessage();
+    // // squareClicked.fill(false);
+    // squareClicked = new Array(emojis.length).fill(false);
+    // squareElement.forEach((square, index) => {
+    //     square.textContent = '';
+    // });
+    // updateBoard();
+    // shuffle();
+    
+    // resultDisplayElement.textContent = 'Click any square to begin';
+
 /*----------------------------- Event Listeners -----------------------------*/
 document.addEventListener('DOMContentLoaded', init);
 
