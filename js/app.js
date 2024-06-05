@@ -1,7 +1,6 @@
 /*-------------------------------- Constants --------------------------------*/
 const emojis = ['🫠','🫠', '🐓', '🐓', '🦄', '🦄', '🌵', '🌵', '💩', '💩', '😾', '😾', '👾', '👾', '🦦', '🦦'];
 /*---------------------------- Variables (state) ----------------------------*/
-const elementemojiArray = emojis.map(id => document.getElementById(id));
 
 const matchingComboSound = new Audio('./Sounds/matching-combo-clap.wav');
 
@@ -17,7 +16,7 @@ let winner;
 
 let gameStart;
 
-let gameOver;
+// let gameOver;
 
 let choosingSquare = false;
 /*------------------------ Cached Element References ------------------------*/
@@ -43,7 +42,6 @@ function init() {
 }
 
 function render() {
-    // updateMessage();
     updateBoard();
 }
 
@@ -58,7 +56,6 @@ function shuffle() {
 function handleClick(event) {
 
     winner = checkForWinner();
-    // gameStart = !winner;
     updateMessage();
 
     const square = event.target;
@@ -73,6 +70,7 @@ function handleClick(event) {
             if (selectedEmojis[0].emoji === selectedEmojis[1].emoji) {
                 matchingCombos.push(selectedEmojis[0].emoji);
                 matchingCombos.push(selectedEmojis[1].emoji);
+                checkForWinner();
                 selectedEmojis = [];
                 matchingComboSound.volume = 0.40;
                 matchingComboSound.play();
@@ -85,9 +83,6 @@ function handleClick(event) {
                 }, 1000);
             }
         }
-        // winner = checkForWinner();
-        // gameStart = !winner;
-        // updateMessage();
     }
 }
 
@@ -109,8 +104,9 @@ function hideSquares(index0, index1) {
 }
 
 function checkForWinner() {
-    if (!squareClicked.includes("")) return true; 
-        // gameStart = false
+    if (matchingCombos.length === emojis.length) {
+        resultDisplayElement.textContent = 'Winner!';
+    }
 }
 
 function updateBoard() {
@@ -128,31 +124,20 @@ function updateMessage() {
         resultDisplayElement.textContent = "";
         gameStart = false;
     }
-    else if (winner === true && gameStart === false) { 
-        resultDisplayElement.textContent = 'Winner!';
-    }
+    // else if (winner === true && gameStart === false) { 
+    //     resultDisplayElement.textContent = 'Winner!';
+    // }
 }
 
 function reset() {
     init();
     updateMessage();
-    squareClicked = new Array(emojis.length).fill(false);
     squareElement.forEach((square, index) => {
         square.textContent = '';
     });
+    matchingCombos = [];
+    squareClicked = ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""];
 }
-    // winner = checkForWinner();
-    // updateMessage();
-    // // squareClicked.fill(false);
-    // squareClicked = new Array(emojis.length).fill(false);
-    // squareElement.forEach((square, index) => {
-    //     square.textContent = '';
-    // });
-    // updateBoard();
-    // shuffle();
-    
-    // resultDisplayElement.textContent = 'Click any square to begin';
-
 /*----------------------------- Event Listeners -----------------------------*/
 document.addEventListener('DOMContentLoaded', init);
 
