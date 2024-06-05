@@ -34,7 +34,7 @@ const boardElement = document.querySelector('.board');
 const resetButtonElement = document.querySelector('#reset');
 /*-------------------------------- Functions --------------------------------*/
 function init() {
-    gameStart = true;
+    // gameStart = true;
     winner = false;
     shuffle();
     board = ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",];
@@ -78,6 +78,7 @@ function handleClick(event) {
             }
         }
     }
+    checkForWinner();
 }
 
 function hideSquares(index0, index1) {
@@ -97,19 +98,25 @@ function hideSquares(index0, index1) {
     squareClicked[index1] = false;
 }
 
-function checkForWinner() {
-    emojis.forEach((filledSquare) => {
-        const [index1, index2, index3, index4] = emojis;
-        const valueA = board[index1];
-        const valueB = board[index2];
-        const valueC = board[index3];
-        const valueD = board[index4];
+// function checkForWinner() {
+//     emojis.forEach((filledSquare) => {
+//         const [index1, index2, index3, index4] = emojis;
+//         const valueA = board[index1];
+//         const valueB = board[index2];
+//         const valueC = board[index3];
+//         const valueD = board[index4];
 
-        if (valueA !== "" && valueA === valueB && valueB === valueC && valueC === valueD) {
-            winner = true;
-        }
-    });
+//         if (valueA !== "" && valueA === valueB && valueB === valueC && valueC === valueD) {
+//             winner = true;
+//         }
+//     });
     
+// }
+
+function checkForWinner() {
+    if (!squareClicked.includes("")) 
+       return winner = true;
+        gameStart = false; 
 }
 
 function updateBoard() {
@@ -123,11 +130,12 @@ function updateBoard() {
     }
 
 function updateMessage() {
-    if (gameStart === true) {
+    if (squareClicked.includes("")) {
         resultDisplayElement.textContent = 'Click any square to begin';
-    } 
-    if (winner === true) 
+    }
+    else if (winner === true && gameStart === false) { 
         resultDisplayElement.textContent = 'Winner!';
+    }
 }
 
 function reset() {
@@ -147,15 +155,23 @@ boardElement.addEventListener('click', handleClick);
 
 soundSquareElement.forEach(square => {
     square.addEventListener('click', (event) => {
-        const sqrSound = new Audio('./Sounds/108616__juskiddink__hard-pop.wav');
+        const sqrSound = new Audio('./Sounds/click-audio.wav');
         sqrSound.volume = 0.40;
         sqrSound.play();
     });
 });
 
+// soundMatchingCombos.forEach(matchingCombo => {
+//     matchingCombo.addEventListener('click', (event) => {
+//         const matchingComboSound = new Audio('./Sounds/matching-combo-clap.wav');
+//         matchingComboSound.volume = 0.40;
+//         matchingComboSound.play();
+//     });
+// });
+
 soundresetElement.addEventListener('click', (event) => {
-    const sqrSound = new Audio('./Sounds/263706__b_lamerichs__ableton-game-sound-effects-09-02-2015-4.mp3');
-    sqrSound.volume = 0.40;
+    const sqrSound = new Audio('./Sounds/reset-audio.mp3');
+    sqrSound.volume = 0.30;
     sqrSound.play();
 });
 
