@@ -10,6 +10,8 @@ const nonMatchSound = new Audio('./Sounds/non-match.wav');
 
 const winnerSound = new Audio('./Sounds/winner-sound.mp3');
 
+const gameOverSound = new Audio('./Sounds/game-over-sound.mp3');
+
 const soundresetElement = document.querySelector('#reset');
 
 let squareClicked = ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",];
@@ -76,6 +78,8 @@ function timer() {
         resultDisplayElement.textContent = 'Game Over';
         clearInterval(gameTimer);
         disableBoard()
+        gameOverSound.volume = 0.40;
+        gameOverSound.play();
     }
 }
 
@@ -133,13 +137,13 @@ function hideSquares(index0, index1) {
     squareClicked[index1] = false;
 }
 
-function disableBoard() { //disables the board when called. Used when the timer runs out.
+function disableBoard() { //disables the board when called. Used when the timer runs out so the player can't keep clicking squares.
     squareElement.forEach((square) => {
         square.disabled = true
     });
 }
 
-function enableBoard() {
+function enableBoard() { // turns disable board off when page is reset so the player can begin a new game.
     squareElement.forEach((square) => {
         square.disabled = false
     });
@@ -180,7 +184,6 @@ function reset() {
 
 /*----------------------------- Event Listeners -----------------------------*/
 
-// document.addEventListener('DOMContentLoaded', init);
 document.addEventListener('DOMContentLoaded', () => {
     // Game level selection
     const easyLevelButton = document.getElementById("easy")

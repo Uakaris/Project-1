@@ -3,7 +3,9 @@
 }
 
 body {
-    background: #9be3f9;
+    /* background: #9be3f9; */
+    background-image: url('../Images/background-image.jpg');
+    background-position: 0%;
     font-family: "Press Start 2P", system-ui;
     font-weight: 400;
     font-style: normal;
