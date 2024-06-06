@@ -1,12 +1,12 @@
 /*-------------------------------- Constants --------------------------------*/
-const emojis = ['🫠','🫠', '🐓', '🐓', '🦄', '🦄', '🌵', '🌵', '💩', '💩', '😾', '😾', '👾', '👾', '🦦', '🦦'];
+
+const emojis = ['🫠', '🫠', '🐓', '🐓', '🦄', '🦄', '🌵', '🌵', '💩', '💩', '😾', '😾', '👾', '👾', '🦦', '🦦'];
+
 /*---------------------------- Variables (state) ----------------------------*/
 
 const matchingComboSound = new Audio('./Sounds/matching-combo-clap.wav');
 
 const nonMatchSound = new Audio('./Sounds/non-match.wav');
-
-// const startSound = new Audio('./Sounds/game-start-sound.wav');
 
 const winnerSound = new Audio('./Sounds/winner-sound.mp3');
 
@@ -26,10 +26,12 @@ let gameStart;
 
 let count;
 
-// let gameOver;
-
 let choosingSquare = false;
+
+let gameTimer
+
 /*------------------------ Cached Element References ------------------------*/
+
 const soundSquareElement = document.querySelectorAll('.sqr');
 
 const squareElement = document.querySelectorAll('.sqr');
@@ -41,23 +43,40 @@ const timerElement = document.querySelector('#timer');
 const boardElement = document.querySelector('.board');
 
 const resetButtonElement = document.querySelector('#reset');
+
 /*-------------------------------- Functions --------------------------------*/
-function init() {
+
+function init(levelTimer) {
     enableBoard();
-    count = 5;
-    timer(setInterval);
-    timerElement.textContent = `Timer: ${ count }`;
-    resultDisplayElement.textContent = 'Click any square to begin';
+    count = levelTimer;
+    timerElement.textContent = `Timer: ${count}`;
+    resultDisplayElement.textContent = 'Quick! Click a square';
     gameStart = true;
     gameOver = false;
     winner = false;
     board = ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",];
     shuffle();
-    render();
+    // Below code block is from original reset function. This was added to the init function to make the code more readable.
+    updateMessage();
+    squareElement.forEach((square, index) => {
+        square.textContent = '';
+    });
+    matchingCombos = [];
+    squareClicked = ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""];
+    // #####################################################################################################################
 }
 
-function render() {
-    updateBoard();
+function timer() {
+    if (count > 0) {
+        count--;
+        timerElement.textContent = `Timer: ${count}`;
+    }
+
+    if (count === 0) {
+        resultDisplayElement.textContent = 'Game Over';
+        clearInterval(gameTimer);
+        disableBoard()
+    }
 }
 
 function shuffle() {
@@ -70,7 +89,7 @@ function shuffle() {
 
 function handleClick(event) {
 
-    winner = checkForWinner();
+    checkForWinner();
     updateMessage();
 
     const square = event.target;
@@ -85,7 +104,7 @@ function handleClick(event) {
             if (selectedEmojis[0].emoji === selectedEmojis[1].emoji) {
                 matchingCombos.push(selectedEmojis[0].emoji);
                 matchingCombos.push(selectedEmojis[1].emoji);
-                winner = checkForWinner();
+                checkForWinner();
                 selectedEmojis = [];
                 matchingComboSound.volume = 0.40;
                 matchingComboSound.play();
@@ -106,12 +125,6 @@ function handleClick(event) {
 function hideSquares(index0, index1) {
     const emoji1 = emojis[index0];
     const emoji2 = emojis[index1];
-
-    // if (emoji1 === emoji2) {
-    //     // If the emojis match, return without hiding
-    //     return;
-    // }
-
     const square1 = document.getElementById(index0);
     const square2 = document.getElementById(index1);
     square1.textContent = '';
@@ -120,17 +133,7 @@ function hideSquares(index0, index1) {
     squareClicked[index1] = false;
 }
 
-const timer = setInterval(function() {
-    count--;
-    timerElement.textContent = `Timer: ${ count }`;
-    if (count === 0) {
-        clearInterval(timer);
-        disableBoard();
-        resultDisplayElement.textContent = 'Game Over';
-    }
-},1000);
-
-function disableBoard() {
+function disableBoard() { //disables the board when called. Used when the timer runs out.
     squareElement.forEach((square) => {
         square.disabled = true
     });
@@ -143,48 +146,65 @@ function enableBoard() {
 }
 
 function checkForWinner() {
-    if (winner === false) {
-        if (matchingCombos.length === emojis.length) {
-            resultDisplayElement.textContent = 'Winner!';
-            winnerSound.volume = 0.50;
-            winnerSound.play();
-            winner = true;
-        }
+    if (matchingCombos.length === emojis.length) {
+        resultDisplayElement.textContent = 'Winner!';
+        clearInterval(gameTimer);
+        winnerSound.volume = 0.50;
+        winnerSound.play();
+        winner = true;
     }
 }
 
 function updateBoard() {
     emojis.forEach((emoji, index) => {
-    // console.log(index);
-    const squareElement = document.getElementById(index);
-    if (!squareClicked[index]) {
-        emojis.textContent = '';
-         }
-        });
-    }
+        const squareElement = document.getElementById(index);
+        if (!squareClicked[index]) {
+            emojis.textContent = '';
+        }
+    });
+}
 
 function updateMessage() {
     if (squareClicked.includes("") && gameStart === true) {
-        resultDisplayElement.textContent = "";
+        resultDisplayElement.textContent = "Quick! Click a square!";
         gameStart = false;
+    } else {
+        resultDisplayElement.textContent = "";
     }
-
-    // else if (winner === true && gameStart === false) { 
-    //     resultDisplayElement.textContent = 'Winner!';
-    // }
 }
 
 function reset() {
-    init();
-    updateMessage();
-    squareElement.forEach((square, index) => {
-        square.textContent = '';
-    });
-    matchingCombos = [];
-    squareClicked = ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""];
+    clearInterval(gameTimer);
+    init(0);
 }
+
 /*----------------------------- Event Listeners -----------------------------*/
-document.addEventListener('DOMContentLoaded', init);
+
+// document.addEventListener('DOMContentLoaded', init);
+document.addEventListener('DOMContentLoaded', () => {
+    // Game level selection
+    const easyLevelButton = document.getElementById("easy")
+    const mediumLevelButton = document.getElementById("medium")
+    const hardLevelButton = document.getElementById("hard")
+
+    easyLevelButton.addEventListener("click", () => {
+        reset()
+        init(90)
+        gameTimer = setInterval(timer, 1000);
+    })
+
+    mediumLevelButton.addEventListener("click", () => {
+        reset()
+        init(60)
+        gameTimer = setInterval(timer, 1000);
+    })
+
+    hardLevelButton.addEventListener("click", () => {
+        reset()
+        init(30)
+        gameTimer = setInterval(timer, 1000);
+    })
+});
 
 boardElement.addEventListener('click', handleClick);
 

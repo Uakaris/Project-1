@@ -13,10 +13,6 @@ body {
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    /* animation: spin;
-    animation-duration: 600ms;
-    animation-iteration-count:inherit;
-    animation-timing-function: ease-out; */
 }
 
 
@@ -24,6 +20,18 @@ body {
 h1 {
     text-align: center;
     color: orange;
+}
+
+#level button {
+    font-family: "Press Start 2P", system-ui;
+    font-weight: 400;
+    font-style: normal;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: #e1c5a3;
+    color: #0097c3;
+    border-color: #ffef55;
+    padding: 11px 14px;
 }
 
 #timer {
@@ -43,30 +51,22 @@ h1 {
     0% {
         opacity: 1;
     }
+
     50% {
         opacity: 0;
     }
+
     100% {
         opacity: 1;
     }
 }
-
-/* #play button {
-    font-family: "Press Start 2P", system-ui;
-    font-weight: 400;
-    font-style: normal;
-    background-color: transparent;
-    color: orange;
-    border-color: #ffef55;
-    padding: 5px 20px; */
-
 
 section {
     justify-content: center;
     align-items: center;
     animation: spin;
     animation-duration: 550ms;
-    animation-iteration-count:inherit;
+    animation-iteration-count: inherit;
     animation-timing-function: ease-out;
 }
 
@@ -74,6 +74,7 @@ section {
     from {
         transform: rotate(0deg);
     }
+
     to {
         transform: rotate(900deg);
     }
@@ -107,9 +108,15 @@ button:hover {
     background-color: #e1c5a3;
     color: #0097c3;
     border-color: #ffef55;
-    padding: 20px 25px;
+    padding: 11px 25px;
 }
 
 #reset button:hover {
     border: orange;
+}
+
+#level {
+    display: flex;
+    width: 300px;
+    justify-content: space-evenly;
 }

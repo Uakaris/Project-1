@@ -1,19 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Project 1 - Memory Game</title>
     <script defer src="./js/app.js"></script>
     <link rel="stylesheet" href="./css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <audio></audio>
 </head>
+
 <body>
     <h1>Memory Game</h1>
+    <div id="level">
+        <button id="easy">EASY</button>
+        <button id="medium">MEDIUM</button>
+        <button id="hard">HARD</button>
+    </div>
     <h2 id='timer'></h2>
     <h2 id="message"></h2>
     <section class="board">
@@ -38,4 +45,5 @@
         <button>Reset</button>
     </h4>
 </body>
+
 </html>
