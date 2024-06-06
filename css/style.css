@@ -3,9 +3,7 @@
 }
 
 body {
-    /* background: #9be3f9; */
-    /* background-image: url('/Project-1/Images/background-image.jpg'); */
-    background-image: url(/Images/background-image.jpg);
+    background: #9be3f9;
     background-size: cover;
     background-position: center;
     font-family: "Press Start 2P", system-ui;
@@ -95,8 +93,7 @@ section {
 button.sqr {
     width: 25%;
     aspect-ratio: 1/1;
-    /* background-color: #e1c5a3; */
-    background-color: transparent;
+    background-color: #e1c5a3;
     border-color: #ffef55;
     font-size: 50px;
 }
