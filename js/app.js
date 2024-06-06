@@ -116,7 +116,7 @@ function hideSquares(index0, index1) {
 function checkForWinner() {
     if (matchingCombos.length === emojis.length) {
         resultDisplayElement.textContent = 'Winner!';
-        winnerSound.volume = 0.40;
+        winnerSound.volume = 0.50;
         winnerSound.play();
     }
 }
@@ -165,7 +165,7 @@ soundSquareElement.forEach(square => {
 
 soundresetElement.addEventListener('click', (event) => {
     const sqrSound = new Audio('./Sounds/game-start-sound.wav');
-    sqrSound.volume = 0.30;
+    sqrSound.volume = 0.40;
     sqrSound.play();
 });
 
