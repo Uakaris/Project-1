@@ -12,7 +12,7 @@ Click the below link to play!
 
 Selected a level of difficulty from the three options. Easy allows 90 seconds to complete the game, medium allows 60 seconds, and hard allows 30 seconds.
 
-Use the mouse to click on squares within the board to reveal the emojis. Matching pairs of emojis once found will remain on the board. If you click two squares that do not match, they will return to being hidden. The aim is to find all matching pairs of emojis within the given time.
+Once you have selected a level of difficulty, use the mouse to click on squares within the board to reveal the emojis. Matching pairs of emojis once found will remain on the board. If you click two squares that do not match, they will return to being hidden. The aim is to find all matching pairs of emojis within the given time.
 
 ![an image of the end state of the game](Images/game-end.png)
 
