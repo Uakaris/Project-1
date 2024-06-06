@@ -4,9 +4,9 @@
 
 body {
     /* background: #9be3f9; */
-    background-image: url('/Images/background-image.jpg');
-    background-image: -webkit-url('/Images/background-image.jpg');
-    background-image: -moz-url('/Images/background-image.jpg');
+    background-image: url('/Project-1/Images/background-image.jpg');
+    /* background-image: -webkit-url('/repository-name/Images/background-image.jpg');
+    background-image: -moz-url('/repository-name/Images/background-image.jpg'); */
     background-size: cover;
     background-position: center;
     font-family: "Press Start 2P", system-ui;
