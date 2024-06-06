@@ -19,12 +19,18 @@ body {
     animation-timing-function: ease-out; */
 }
 
+
+
 h1 {
     text-align: center;
     color: orange;
 }
 
-h2 {
+#timer {
+    color: orange;
+}
+
+#message {
     color: orange;
     text-align: center;
     font-size: 16px;

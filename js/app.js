@@ -24,6 +24,8 @@ let winner;
 
 let gameStart;
 
+let count;
+
 // let gameOver;
 
 let choosingSquare = false;
@@ -34,15 +36,20 @@ const squareElement = document.querySelectorAll('.sqr');
 
 const resultDisplayElement = document.querySelector('#message');
 
+const timerElement = document.querySelector('#timer');
+
 const boardElement = document.querySelector('.board');
 
 const resetButtonElement = document.querySelector('#reset');
 /*-------------------------------- Functions --------------------------------*/
 function init() {
+    enableBoard();
+    count = 5;
+    timer(setInterval);
+    timerElement.textContent = `Timer: ${ count }`;
     resultDisplayElement.textContent = 'Click any square to begin';
-    // startSound.volume = 0.40;
-    // startSound.play();
     gameStart = true;
+    gameOver = false;
     winner = false;
     board = ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",];
     shuffle();
@@ -78,7 +85,7 @@ function handleClick(event) {
             if (selectedEmojis[0].emoji === selectedEmojis[1].emoji) {
                 matchingCombos.push(selectedEmojis[0].emoji);
                 matchingCombos.push(selectedEmojis[1].emoji);
-                checkForWinner();
+                winner = checkForWinner();
                 selectedEmojis = [];
                 matchingComboSound.volume = 0.40;
                 matchingComboSound.play();
@@ -113,11 +120,36 @@ function hideSquares(index0, index1) {
     squareClicked[index1] = false;
 }
 
+const timer = setInterval(function() {
+    count--;
+    timerElement.textContent = `Timer: ${ count }`;
+    if (count === 0) {
+        clearInterval(timer);
+        disableBoard();
+        resultDisplayElement.textContent = 'Game Over';
+    }
+},1000);
+
+function disableBoard() {
+    squareElement.forEach((square) => {
+        square.disabled = true
+    });
+}
+
+function enableBoard() {
+    squareElement.forEach((square) => {
+        square.disabled = false
+    });
+}
+
 function checkForWinner() {
-    if (matchingCombos.length === emojis.length) {
-        resultDisplayElement.textContent = 'Winner!';
-        winnerSound.volume = 0.50;
-        winnerSound.play();
+    if (winner === false) {
+        if (matchingCombos.length === emojis.length) {
+            resultDisplayElement.textContent = 'Winner!';
+            winnerSound.volume = 0.50;
+            winnerSound.play();
+            winner = true;
+        }
     }
 }
 
@@ -136,6 +168,7 @@ function updateMessage() {
         resultDisplayElement.textContent = "";
         gameStart = false;
     }
+
     // else if (winner === true && gameStart === false) { 
     //     resultDisplayElement.textContent = 'Winner!';
     // }
@@ -168,5 +201,7 @@ soundresetElement.addEventListener('click', (event) => {
     sqrSound.volume = 0.40;
     sqrSound.play();
 });
+
+boardElement.classList.add('animate__animated', 'animate__rotateIn');
 
 resetButtonElement.addEventListener('click', reset);
