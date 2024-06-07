@@ -3,7 +3,8 @@
 }
 
 body {
-    background: #9be3f9;
+    /* background: #9be3f9; */
+    background: url('./background-image.png');
     background-size: cover;
     background-position: center;
     font-family: "Press Start 2P", system-ui;
