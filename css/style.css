@@ -4,7 +4,6 @@
 }
 
 body {
-    /* background: #9be3f9; */
     font-family: "Press Start 2P", system-ui;
     font-weight: 400;
     font-style: normal;
@@ -25,7 +24,7 @@ img {
 
 h1 {
     text-align: center;
-    color: orange;
+    color: whitesmoke;
     margin-bottom: 30px;
 }
 
@@ -35,19 +34,23 @@ h1 {
     font-style: normal;
     justify-content: space-evenly;
     align-items: center;
-    background-color: #e1c5a3;
-    color: #0097c3;
-    border-color: #ffef55;
+    color: whitesmoke;
     padding: 11px 14px;
     margin-bottom: 30px;
+    background: rgba( 0, 0, 0, 0.65 );
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 3.5px );
+    -webkit-backdrop-filter: blur( 3.5px );
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+
 }
 
 #timer {
-    color: orange;
+    color: whitesmoke
 }
 
 #message {
-    color: orange;
+    color: whitesmoke;
     text-align: center;
     font-size: 16px;
     padding-bottom: 20px;
@@ -100,9 +103,14 @@ section {
 button.sqr {
     width: 25%;
     aspect-ratio: 1/1;
-    background-color: #e1c5a3;
     border-color: #ffef55;
     font-size: 50px;
+    
+    background: rgba( 0, 0, 0, 0.65 );
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 3.5px );
+    -webkit-backdrop-filter: blur( 3.5px );
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
 }
 
 button:hover {
@@ -114,10 +122,13 @@ button:hover {
     font-family: "Press Start 2P", system-ui;
     font-weight: 400;
     font-style: normal;
-    background-color: #e1c5a3;
-    color: #0097c3;
-    border-color: #ffef55;
+    color: whitesmoke;
     padding: 11px 25px;
+    background: rgba( 0, 0, 0, 0.65 );
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 3.5px );
+    -webkit-backdrop-filter: blur( 3.5px );
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
 }
 
 #reset button:hover {
