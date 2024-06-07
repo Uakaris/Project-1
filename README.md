@@ -38,7 +38,7 @@ All audio was sourced from [Freesound](https://freesound.org/)
 
 General css animations were used along with animations from [Animate.css](https://animate.style/)
 
-Background image was sourced from [freepik](https://www.freepik.com/)
+Background image was sourced from <a href="https://www.freepik.com/free-vector/retro-futuristic-landscape-background-with-palm-trees_5416973.htm#fromView=search&page=1&position=0&uuid=423908b1-51e0-49f7-a5f3-6a4030120b6e">Image by freepik</a>
 
 Further credit to **Sarma** for his help with finishing my timer function as well as spending a huge amount of time helping to create the 'easy', 'medium', and 'hard' timer settings. And credit to **CJ** for assisting with the ***checkForWinner*** function and with early issues with the ***reset*** function. The assistance was greatly appreciated.
 
