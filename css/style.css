@@ -1,12 +1,10 @@
 * {
     box-sizing: border-box;
+    margin: 0;
 }
 
 body {
     /* background: #9be3f9; */
-    background: url('./background-image.png');
-    background-size: cover;
-    background-position: center;
     font-family: "Press Start 2P", system-ui;
     font-weight: 400;
     font-style: normal;
@@ -18,11 +16,17 @@ body {
     overflow: hidden;
 }
 
-
+img {
+    z-index: -1;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
 
 h1 {
     text-align: center;
     color: orange;
+    margin-bottom: 30px;
 }
 
 #level button {
@@ -35,6 +39,7 @@ h1 {
     color: #0097c3;
     border-color: #ffef55;
     padding: 11px 14px;
+    margin-bottom: 30px;
 }
 
 #timer {
@@ -89,6 +94,7 @@ section {
     width: 325px;
     /* height: 325px; */
     margin: 0 auto;
+    margin-bottom: 40px;
 }
 
 button.sqr {
